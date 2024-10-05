@@ -14,3 +14,7 @@ class PokemonByIDViewset(viewsets.ModelViewSet):
 
     def get_queryset(self, pokemon_id):
         return Pokemon.objects.filter(pk = pokemon_id)
+    
+
+def defualtView(request):
+    return render(request, template_name='index.html')
