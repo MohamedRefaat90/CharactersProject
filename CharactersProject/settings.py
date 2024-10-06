@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-3_np)^8j1om78fk22(15y$#5%oi5(#_3ji!$tl6s2!ch2glm3z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app','127.0.0.1','10.0.2.2']
 
 
 # Application definition
@@ -93,8 +93,9 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-DATABASES['default'] = dj_database_url.config()
-
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+# }
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
