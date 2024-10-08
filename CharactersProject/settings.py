@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 import os
 from pathlib import Path
 import dj_database_url
@@ -41,9 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'accounts',
     'Pokemons',
     'HarryPotter',
     'rest_framework',
+    'knox'
 
 ]
 
@@ -136,3 +139,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Make Defualt Authentication Via Knox
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
+
+REST_KNOX = {
+    'USER_SERIALIZER': 'accounts.serializers.UserSerializer',
+    'TOKEN_TTL': timedelta(hours=48)
+}
