@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'Pokemons',
     'HarryPotter',
     'rest_framework',
-    'knox'
+    # 'knox'
 
 ]
 
@@ -59,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 ROOT_URLCONF = 'CharactersProject.urls'
 
@@ -142,10 +144,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Make Defualt Authentication Via Knox
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'knox.auth.TokenAuthentication',
+                                       ),
 }
 
-REST_KNOX = {
-    'USER_SERIALIZER': 'accounts.serializers.UserSerializer',
-    'TOKEN_TTL': timedelta(hours=48)
-}
+# REST_KNOX = {
+#     'USER_SERIALIZER': 'accounts.serializers.UserSerializer',
+#     'TOKEN_TTL': timedelta(hours=48)
+# }
+
+
+
+# from knox.models import AuthToken
+# from accounts.models import User  # Use your actual custom user model
+
+# # Get the CustomUser instance
+# user = User.objects.get(email='x9@gmail.com')
+
+# # Create a Knox token for the custom user
+# token = AuthToken.objects.create(user)  # Ensure user is a CustomUser instance
+# print(token)

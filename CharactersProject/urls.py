@@ -19,6 +19,7 @@ from django.urls import path, include
 from Pokemons import views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/', include("accounts.urls")),
     path('Pokemons/', include('Pokemons.urls')),
     path('HarryPotter/', include('HarryPotter.urls')),
 ]
