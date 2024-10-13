@@ -46,9 +46,16 @@ INSTALLED_APPS = [
     'Pokemons',
     'HarryPotter',
     'rest_framework',
-    # 'knox'
+    'knox',
+    'drf_spectacular',
 
 ]
+
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'accounts.backends.EmailBackend',  # Create a custom backend for email authentication
+# ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -145,23 +152,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Make Defualt Authentication Via Knox
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'knox.auth.TokenAuthentication',
-                                       ),
+        'knox.auth.TokenAuthentication',  # Knox authentication
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',  # Restrict access to authenticated users
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
-# REST_KNOX = {
-#     'USER_SERIALIZER': 'accounts.serializers.UserSerializer',
-#     'TOKEN_TTL': timedelta(hours=48)
-# }
 
+REST_KNOX = {
+    'TOKEN_TTL': timedelta(hours=48),  # Token Time to Live (Optional)
+    'USER_SERIALIZER': 'accounts.serializers.UserSerializer',  # Customize user serializer (Optional)
+}
 
-
-# from knox.models import AuthToken
-# from accounts.models import User  # Use your actual custom user model
-
-# # Get the CustomUser instance
-# user = User.objects.get(email='x9@gmail.com')
-
-# # Create a Knox token for the custom user
-# token = AuthToken.objects.create(user)  # Ensure user is a CustomUser instance
-# print(token)
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Characters API',
+    'DESCRIPTION': 'This is a Characters App API documentation.',
+    'VERSION': '1.0.0',
+    # 'SERVE_INCLUDE_SCHEMA': False
+}

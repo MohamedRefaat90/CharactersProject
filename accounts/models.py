@@ -46,7 +46,9 @@ class CustomUser(AbstractBaseUser):
 
     # This is the field that is used to log in
     USERNAME_FIELD = 'email'
-
+    
+    REQUIRED_FIELDS=[]
+    
     objects = UserManager()
     
     def __str__(self):
